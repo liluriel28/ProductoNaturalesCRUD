@@ -6,7 +6,7 @@
 
 
 <style>
-    
+
     .table-hover tbody tr:hover {
         background-color: #d4edda;
         color: #155724;
@@ -26,8 +26,24 @@
     <div class="row row-cols-lg-4">
         <div class="col">
             @Html.LabelFor(model => model.SubCategoria.Categoria)
-            @Html.DropDownListFor(model => model.SubCategoria.Categoria.IdCategoria, new SelectList(Model.SubCategoria.Categoria.Categorias, "IdCategoria", "Nombre", Model.SubCategoria.Categoria.IdCategoria), "Selecciona una categoría", new { @class= "form-control", id= "IdCategoria", onchange="cargarSubCategorias()"})
+            @Html.DropDownListFor(model => model.SubCategoria.Categoria.IdCategoria, new SelectList(Model.SubCategoria.Categoria.Categorias, "IdCategoria", "Nombre", Model.SubCategoria.Categoria.IdCategoria), "Selecciona una categoría", new { @class = "form-control", id = "ddlCategoria", onchange = "cargarSubCategorias()" })
         </div>
+
+        <div class="col">
+            @Html.LabelFor(model => model.SubCategoria)
+
+            @if (Model.SubCategoria != null && Model.SubCategoria.SubCategorias != null && Model.SubCategoria.SubCategorias.Count > 0)
+            {
+
+                @Html.DropDownListFor(model => model.SubCategoria.IdSubCategoria, new SelectList(Model.SubCategoria.SubCategorias, "IdSubCategoria", "Nombre", Model.SubCategoria.IdSubCategoria), "Selecciona una subcategoria", new { @class = "form-control" })
+            }
+            else
+            {
+                @Html.DropDownListFor(model => model.SubCategoria.IdSubCategoria, new SelectList(String.Empty), "Selecciona una subcategoria", new { @class = "form-control", id = "ddlSubCategoria" })
+            }
+
+        </div>
+
     </div>
 }
 
@@ -81,5 +97,6 @@ else
 
 
 <script src="~/Scripts/jquery-3.7.0.js"></script>
-<script> var ddlSuCategoriaUrl = "@Url.Action()" </script>
-@*Crear el archvio js*@
+<script> var ddlSuCategoriaUrl = "@Url.Action("GetAllByCategoria", "ProductoG")?ddlCategoria=" </script>
+<script src="~/Scripts/Js/Index.js"></script>
+
