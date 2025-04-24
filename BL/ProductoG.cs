@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public class Producto
+    public class ProductoG
     {
         public static ML.Result GetAll(ML.Producto productoObj)
         {
